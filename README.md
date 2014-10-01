@@ -6,7 +6,7 @@
 oada-lookup-js
 ==============
 JavaScript utility library to lookup OADA documents such as [Well-Known (RFC
-5785)][well-known] resource, e.g., oada-configuration, openid-configuration,
+5785)][well-known] resource, e.g., oada-configuration, [openid-configuration][],
 etc, and public OADA client registrations.
 
 Getting Started
@@ -93,7 +93,9 @@ lookup.clientRegistration('xJx82s@provider.oada-dev.com', options,
 References
 ----------
 
-[well-known]: http://tools.ietf.org/html/rfc5785
 1. [Defining Well-Known Uniform Resource Identifiers (URIs)][well-known]
+2. [OpenID Discovery](http://openid.net/specs/openid-connect-discovery-1_0.html)
 
+[well-known]: http://tools.ietf.org/html/rfc5785
+[openid-configuration]: http://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata
 [`suffix`]: http://tools.ietf.org/html/rfc5785#section-5.1.1 "RFC5785 Section 5.1.1"
