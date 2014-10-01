@@ -1,0 +1,6 @@
+{
+  "authorization_endpoint": "https://oada.local/auth",
+  "token_endpoint": "https://oada.local/token",
+  "OADABaseUri": "https://oada.local",
+  "clientDiscovery": "https://oada.local/discover"
+}
