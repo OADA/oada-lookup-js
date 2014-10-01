@@ -211,12 +211,16 @@ describe('lookup', function() {
     it('should fail if OADA configuration cannot be found', function(done) {
       nock.cleanAll();
 
+      nock(mockUrl)
+        .get('/.well-known/oada-configuration')
+        .reply(404);
+
       var options = {
         timeout: 10
       };
 
-      lookup.clientRegistration(clientId, options, function(err) {
-        expect(err.timeout).to.equal(options.timeout);
+      lookup.clientRegistration(clientId, options, function(err, c) {
+        expect(err.status).to.equal(404);
 
         done();
       });
