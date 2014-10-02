@@ -219,7 +219,7 @@ describe('lookup', function() {
         timeout: 10
       };
 
-      lookup.clientRegistration(clientId, options, function(err, c) {
+      lookup.clientRegistration(clientId, options, function(err) {
         expect(err.status).to.equal(404);
 
         done();

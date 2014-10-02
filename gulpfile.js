@@ -17,88 +17,22 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
-var istanbul = require('gulp-istanbul');
-var mocha = require('gulp-mocha');
-var del = require('del');
-var beep = require('beepbeep');
 
-var files = {
-  gulpfile: ['gulpfile.js'],
-  source: [ 'lookup.js' ],
-  tests: ['test/**/*.js'],
-};
+var files = ['gulpfile.js', 'lookup.js', 'test/**/*.js'];
 
-gulp.task('default', ['lint', 'style', 'test', 'watch']);
+gulp.task('default', ['lint', 'style', 'watch']);
 
 gulp.task('lint', function() {
-  return gulp.src(Array.prototype.concat.apply([],
-    [
-      files.gulpfile,
-      files.source,
-      files.tests
-    ]))
+  return gulp.src(files)
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('style', function() {
-  return gulp.src(Array.prototype.concat.apply([],
-    [
-      files.gulpfile,
-      files.source,
-      files.tests
-    ]))
+  return gulp.src(files)
     .pipe(jscs());
 });
 
-gulp.task('test', function() {
-  return gulp.src(files.tests)
-    .pipe(mocha({reporter: 'spec'}));
-});
-
-gulp.task('cover', function(done) {
-  gulp.src(files.source)
-    .pipe(istanbul({includeUntested: true}))
-    .on('finish', function() {
-      gulp.src(files.tests)
-        .pipe(mocha())
-        .on('error', function() {})
-        .pipe(istanbul.writeReports({
-          dir: './coverage',
-          reporters: ['lcov', 'text', 'text-summary']
-        }))
-        .on('end', done);
-    });
-});
-
-gulp.task('clean', function(done) {
-  del(['./coverage'], done);
-});
-
 gulp.task('watch', function() {
-  gulp.watch(Array.prototype.concat.apply([],
-    [
-      files.gulpfile,
-      files.source,
-      files.tests
-    ]), ['test', 'lint', 'style']);
-});
-
-gulp.task('watch:cover', function() {
-  gulp.watch(Array.prototype.concat.apply([],
-    [
-      files.gulpfile,
-      files.source,
-      files.tests
-    ]), ['cover', 'lint', 'style']);
-});
-
-/// Helpers
-require('better-stack-traces').install({
-  collapseLibraries: /node_modules/
-});
-
-gulp.on('err', function() {
-  beep(1);
+  gulp.watch(files, ['lint', 'style']);
 });
