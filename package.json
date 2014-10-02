@@ -1,6 +1,6 @@
 {
   "name": "oada-lookup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript utility library to lookup OADA documents such as Well-Known (RFC 5785) resource, e.g., oada-configuration, openid-configuration, etc, and public OADA client registrations",
   "keywords": [
     "OADA",
@@ -24,7 +24,7 @@
     "url": "https://github.com/OADA/oada-lookup-js.git"
   },
   "engines": {
-    "node": ">=0.11"
+    "node": ">=0.10"
   },
   "scripts": {
     "test": "./node_modules/.bin/_mocha -w",
