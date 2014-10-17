@@ -78,8 +78,10 @@ function clientRegistration(clientId, options, cb) {
     return cb(new Error('Invalid clientId'));
   }
 
+  var host = 'https://' + cid[1];
+
   // Get the OADA configuration of where the client is hosted
-  wellKnown(cid[1], 'oada-configuration',  options, function(err, conf) {
+  wellKnown(host, 'oada-configuration',  options, function(err, conf) {
     if (err) { return cb(err); }
 
     // Verify the host support client discovery
