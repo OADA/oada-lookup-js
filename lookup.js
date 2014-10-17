@@ -107,5 +107,35 @@ function clientRegistration(clientId, options, cb) {
   });
 }
 
+// Fetch a JSON Web Key Set
+function jwks(uri, options, cb) {
+  // Check for options object
+  if (typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
+  // Default options
+  options.timeout = options.timeout || 1000;
+
+  // Get JWKs document
+  request
+    .get(uri)
+    .accept('application/json')
+    .timeout(options.timeout)
+    .end(function(err, res) {
+      if (err) { return cb(err); }
+
+      if (res.ok && Object.keys(res.body).length && res.body.keys) {
+        cb(null, res.body);
+      } else if (res.ok) {
+        cb(new Error('Invalid JWKs document'));
+      } else {
+        cb(res.error);
+      }
+    });
+}
+
 module.exports.wellKnown = wellKnown;
 module.exports.clientRegistration = clientRegistration;
+module.exports.jwks = jwks;
