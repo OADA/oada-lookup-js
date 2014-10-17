@@ -1,10 +1,21 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "0.11"
-
+- '0.10'
+- '0.11'
+deploy:
+  provider: npm
+  email: andrew@balmos.org
+  api_key:
+    secure: EGpFDNjkqU0ATi8B5zQgB+/DvwKkZPwdZ3i1zwHqHyqcrzhNj/d7AdQMaXzeOjHYaO86ShKwKO4iK7tSwUjS+mffp2pB+5GQFPqL7TOAYdzx79OEYYIe4/wgRjL9TKqmjSswh7YnDxKl0aMkDmJzWNiwf7bsshfV9GyqRxzuTM0=
+  on:
+    tags: true
+    all_branches: true
+    repo: OADA/oada-lookup-js
+before_install:
+- npm install -g gulp
 script:
-  - npm run cover
-
+- gulp lint
+- gulp style
+- npm run cover
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls --verbose
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls --verbose
