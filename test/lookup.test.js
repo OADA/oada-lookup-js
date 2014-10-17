@@ -23,6 +23,7 @@ var lookup = require('../lookup');
 
 var oadaConfig = require('./sample/oada-configuration');
 var clientReg = require('./sample/client-registration');
+var jwks = require('./sample/jwks');
 
 var mockUrl = 'https://oada.local';
 var mockHost = 'oada.local';
@@ -221,6 +222,71 @@ describe('lookup', function() {
 
       lookup.clientRegistration(clientId, options, function(err) {
         expect(err.status).to.equal(404);
+
+        done();
+      });
+    });
+  });
+
+  describe('#jwks', function() {
+
+    afterEach(function() {
+      nock.cleanAll();
+    });
+
+    it('should be exported', function() {
+      expect(lookup.jwks).to.be.a.function;
+    });
+
+    it('should fetch document', function(done) {
+      nock(mockUrl)
+        .get('/jwks')
+        .reply(200, jwks);
+
+      lookup.jwks(mockUrl + '/jwks', function(err, keys) {
+        expect(err).to.not.be.ok;
+        expect(keys).to.deep.equal(jwks);
+
+        done();
+      });
+    });
+
+    it('should fail if non-existent', function(done) {
+      nock(mockUrl)
+        .get('/jwks')
+        .reply(404);
+
+      lookup.jwks(mockUrl + '/jwks', function(err) {
+        expect(err.status).to.equal(404);
+
+        done();
+      });
+    });
+
+    it('should fail if not valid', function(done) {
+      nock(mockUrl)
+        .get('/jwks')
+        .reply(200, 'Invalid Response');
+
+      lookup.jwks(mockUrl + '/jwks', function(err) {
+        expect(err).to.match(/Invalid JWKs document/);
+
+        done();
+      });
+    });
+
+    it('should fail after timeout', function(done) {
+      var options = {
+        timeout: 10,
+      };
+
+      nock(mockUrl)
+        .get('/jwks')
+        .delayConnection(2 * options.timeout)
+        .reply(200, jwks);
+
+      lookup.jwks(mockUrl + '/jwks', options, function(err) {
+        expect(err.timeout).to.equal(options.timeout);
 
         done();
       });

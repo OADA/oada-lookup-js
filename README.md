@@ -96,6 +96,34 @@ lookup.clientRegistration('xJx82s@provider.oada-dev.com', options,
   });
 ```
 
+### jwks(uri, options, cb) ###
+Fetch a [Json Web Key Set (JWKS)][json-web-key-set] from an URI.
+
+#### Parameters ####
+`uri` {String} The URI containing the desired JWKS document. For example, the
+value of the OpenID Connect openid-configuration `jwks_uri` property.
+
+`options` {Object} containing at least the following properties:
+
+* `timeout` {Number} *Default: 1000* Timeout before HTTP request fails in ms.
+
+`cb` {Function} Result callback. It takes the form `function(err, jwks){}`.
+
+#### Usage Example ####
+```javascript
+var lookup = require('oada-lookup');
+
+var options = {
+  timeout: 500
+};
+
+lookup.jwks('provider.oada-dev.com/oidc/jwks', options,
+  function(err, jwks) {
+    console.log(err);
+    console.log(jwks);
+  });
+```
+
 References
 ----------
 
@@ -105,3 +133,4 @@ References
 [well-known]: http://tools.ietf.org/html/rfc5785
 [openid-configuration]: http://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata
 [`suffix`]: http://tools.ietf.org/html/rfc5785#section-5.1.1 "RFC5785 Section 5.1.1"
+[json-web-key-set]: https://tools.ietf.org/html/draft-ietf-jose-json-web-key-33#page-10
