@@ -6,7 +6,7 @@ deploy:
   provider: npm
   email: andrew@balmos.org
   api_key:
-    secure: EGpFDNjkqU0ATi8B5zQgB+/DvwKkZPwdZ3i1zwHqHyqcrzhNj/d7AdQMaXzeOjHYaO86ShKwKO4iK7tSwUjS+mffp2pB+5GQFPqL7TOAYdzx79OEYYIe4/wgRjL9TKqmjSswh7YnDxKl0aMkDmJzWNiwf7bsshfV9GyqRxzuTM0=
+    secure: KS/Sp8edkmV0ZJFAejz1ImIGrHUfXy1DQWHqFbl6+CUBIqikpNSS9hUlmc8CEE8+e2LczKb3/MJRlVnVcw+VSNblkWWSWQTKppEcOYn3mtw8+cGD33JnReLpLb8oFBzEb6EZABLMF5RNrGvsbhVnzFhzV53q+PzQAozvyPUj4ns=
   on:
     tags: true
     all_branches: true
