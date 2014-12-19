@@ -57,10 +57,10 @@ function wellKnown(hostname, suffix, options, cb) {
       } else if (res.ok) {
         cb(new Error('Invalid ' + suffix + ' Well-Known'));
       } else {
-          cb(new OADAError(res.error.text,
-                           res.error.status,
-                           suffix + ' at ' + hostname + ' not found',
-                           res.error.path));
+        cb(new OADAError(res.error.text,
+            res.error.status,
+            suffix + ' at ' + hostname + ' not found',
+            res.error.path));
       }
     });
 }
