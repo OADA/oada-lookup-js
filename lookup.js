@@ -81,17 +81,17 @@ function clientRegistration(clientId, options, cb) {
   var host = 'https://' + cid[1];
 
   // Get the OADA configuration of where the client is hosted
-  wellKnown(host, 'oada-configuration',  options, function(err, conf) {
+  wellKnown(host, 'oada-client-discovery',  options, function(err, conf) {
     if (err) { return cb(err); }
 
     // Verify the host support client discovery
-    if (!conf.clientDiscovery) {
+    if (!conf['client_discovery']) {
       return cb(new Error('Host does not support client discovery'));
     }
 
     // Discover the clients registration
     request
-      .get(conf.clientDiscovery)
+      .get(conf['client_discovery'])
       .query({'clientId': clientId})
       .accept('applcation/json')
       .timeout(options.timeout)

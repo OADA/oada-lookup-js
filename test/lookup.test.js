@@ -22,6 +22,7 @@ var nock = require('nock');
 var lookup = require('../lookup');
 
 var oadaConfig = require('./sample/oada-configuration');
+var oadaClientDiscovery = require('./sample/oada-client-discovery');
 var clientReg = require('./sample/client-registration');
 var jwks = require('./sample/jwks');
 var trustedCDP = require('./sample/client-discovery');
@@ -116,8 +117,8 @@ describe('lookup', function() {
 
     beforeEach(function() {
       nock(mockUrl)
-        .get('/.well-known/oada-configuration')
-        .reply(200, oadaConfig);
+        .get('/.well-known/oada-client-discovery')
+        .reply(200, oadaClientDiscovery);
     });
 
     afterEach(function() {
@@ -197,10 +198,10 @@ describe('lookup', function() {
     it('should fail if provider does not support discovery', function(done) {
       // Disable client discovery
       var config = JSON.parse(JSON.stringify(oadaConfig));
-      delete config.clientDiscovery;
+      delete config['client_discovery'];
       nock.cleanAll();
       nock(mockUrl)
-        .get('/.well-known/oada-configuration')
+        .get('/.well-known/oada-client-discovery')
         .reply(200, config);
 
       lookup.clientRegistration(clientId, function(err) {
@@ -214,7 +215,7 @@ describe('lookup', function() {
       nock.cleanAll();
 
       nock(mockUrl)
-        .get('/.well-known/oada-configuration')
+        .get('/.well-known/oada-client-discovery')
         .reply(404);
 
       var options = {

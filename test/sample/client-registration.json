@@ -5,14 +5,22 @@
     "http://oada.other/redirect2"
   ],
   "licenses": [
-    "oada"
+    {
+      "id": "oada-1.0",
+      "name": "OADA Fictitious Agreement v1.0"
+    }
   ],
-  "keys": [{
-    "kty": "RSA",
-    "use": "sig",
-    "alg": "RS256",
-    "kid": "ad8alkjca38afvudsZA",
-    "n": "AOtWalmH3vZ2q2BeSRQjYzxqpyVR9HEJYJsTLkuD6pYrqwGPDxDChlALvH8PvRWTyBMMLA+jTjMOcovSCm0TEJfJ1pyDtPgtA1uPg5bn5CICPNieQuHwMwBSpjgB9B19eSgcoOqSZhhf6gMUX8FvggR08jBXhzZpAVNi1eNL4WmsD0Qkxz4L1YQu0euHflBGZ8OOyVe6tapm4UKJYWihE28cXlra8qqwfY4J1brv5Ot3yZMSOAfQ+4rf9J3ISChmVC3H/sshtUFwsd65I/7IpjawaRCsYwvrN/CMxXa5vcb4H2NzNOqidPqJzoHYa4WLDArpypZfb7krRUrrHRlT2xk",
-    "e": "AQAB"
-  }]
+  "keys": [
+    {
+      "kty": "RSA",
+      "use": "sig",
+      "alg": "RS256",
+      "kid": "nc63dhaSdd82w32udx6v",
+      "n":   "AKj8uuRIHMaq-EJVf2d1QoB1DSvFvYQ3Xa1gvVxaXgxDiF9-Dh7bO5f0VotrYD05MqvY9X_zxF_ioceCh3_rwjNFVRxNnnIfGx8ooOO-1f4SZkHE-mbhFOe0WFXJqt5PPSL5ZRYbmZKGUrQWvRRy_KwBHZDzD51b0-rCjlqiFh6N",
+      "e": "AQAB"
+    }
+  ],
+  "name": "OADA test",
+  "contact": "info@oada.other",
+  "puc": "https://oada.other/puc.html"
 }
