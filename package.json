@@ -1,6 +1,6 @@
 {
   "name": "oada-lookup",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "JavaScript utility library to lookup OADA documents such as Well-Known (RFC 5785) resource, e.g., oada-configuration, openid-configuration, etc, and public OADA client registrations",
   "keywords": [
     "OADA",
