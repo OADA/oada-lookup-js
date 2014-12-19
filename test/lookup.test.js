@@ -24,6 +24,7 @@ var lookup = require('../lookup');
 var oadaConfig = require('./sample/oada-configuration');
 var clientReg = require('./sample/client-registration');
 var jwks = require('./sample/jwks');
+var trustedCDP = require('./sample/client-discovery');
 
 var mockUrl = 'https://oada.local';
 var mockHost = 'oada.local';
@@ -286,6 +287,71 @@ describe('lookup', function() {
         .reply(200, jwks);
 
       lookup.jwks(mockUrl + '/jwks', options, function(err) {
+        expect(err.timeout).to.equal(options.timeout);
+
+        done();
+      });
+    });
+  });
+
+  describe('#trustedCDP', function() {
+
+    afterEach(function() {
+      nock.cleanAll();
+    });
+
+    it('should be exported', function() {
+      expect(lookup.trustedCDP).to.be.a.function;
+    });
+
+    it('should fetch document', function(done) {
+      nock('https://raw.githubusercontent.com')
+        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+        .reply(200, trustedCDP);
+
+      lookup.trustedCDP(function(err, keys) {
+        expect(err).to.not.be.ok;
+        expect(keys).to.deep.equal(trustedCDP);
+
+        done();
+      });
+    });
+
+    it('should fail if non-existent', function(done) {
+      nock('https://raw.githubusercontent.com')
+        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+        .reply(404);
+
+      lookup.trustedCDP(function(err) {
+        expect(err.status).to.equal(404);
+
+        done();
+      });
+    });
+
+    it('should fail if not valid', function(done) {
+      nock('https://raw.githubusercontent.com')
+        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+        .reply(200, 'Invalid Response');
+
+      lookup.trustedCDP(function(err) {
+        expect(err).to.match(/Invalid trusted client discovery provider list/);
+
+        done();
+      });
+    });
+
+    it('should fail after timeout', function(done) {
+      var options = {
+        timeout: 10,
+      };
+
+      nock('https://raw.githubusercontent.com')
+        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+        .delayConnection(2 * options.timeout)
+        .reply(200, trustedCDP);
+
+      lookup.trustedCDP(options, function(err) {
         expect(err.timeout).to.equal(options.timeout);
 
         done();

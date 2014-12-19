@@ -138,6 +138,38 @@ function jwks(uri, options, cb) {
     });
 }
 
+// Fetch trsuted client discovery providers list
+function trustedCDP(options, cb) {
+  // Check for options object
+  if (typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
+  // Default options
+  options.timeout = options.timeout || 1000;
+
+  // Get trusted CDP list
+  request
+    .get('https://raw.githubusercontent.com/OADA/oada-trusted-lists/master/client-discovery.json')
+    .accept('text/plain')
+    .timeout(options.timeout)
+    .end(function(err, res) {
+      if (err) { return cb(err); }
+
+      if(res.ok) {
+        try {
+          cb(null, JSON.parse(res.text));
+        } catch (e) {
+          cb(new Error('Invalid trusted client discovery provider list'));
+        }
+      } else {
+        cb(res.error);
+      }
+    });
+}
+
 module.exports.wellKnown = wellKnown;
 module.exports.clientRegistration = clientRegistration;
 module.exports.jwks = jwks;
+module.exports.trustedCDP = trustedCDP;
