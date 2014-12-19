@@ -16,6 +16,7 @@
 
 var url = require('url');
 var request = require('superagent');
+var OADAError = require('oada-error').OADAError;
 
 // Fetch a Well-Known (RFC 5785) Resource. The hostname will automatically be
 // parsed from any URL.
@@ -56,7 +57,10 @@ function wellKnown(hostname, suffix, options, cb) {
       } else if (res.ok) {
         cb(new Error('Invalid ' + suffix + ' Well-Known'));
       } else {
-        cb(res.error);
+          cb(new OADAError(res.error.text,
+                           res.error.status,
+                           suffix + ' at ' + hostname + ' not found',
+                           res.error.path));
       }
     });
 }
@@ -103,7 +107,10 @@ function clientRegistration(clientId, options, cb) {
         } else if (res.ok) {
           cb(new Error('Invalid client registration'));
         } else {
-          cb(res.error);
+          cb(new OADAError(res.error.text,
+                           res.error.status,
+                           'Client not found',
+                           res.error.path));
         }
       });
   });
@@ -133,7 +140,10 @@ function jwks(uri, options, cb) {
       } else if (res.ok) {
         cb(new Error('Invalid JWKs document'));
       } else {
-        cb(res.error);
+        cb(new OADAError(res.error.text,
+                         res.error.status,
+                         'Client public keys not found',
+                         res.error.path));
       }
     });
 }
@@ -162,7 +172,10 @@ function trustedCDP(options, cb) {
       } else if (res.ok) {
         cb(new Error('Invalid trusted client discovery provider list'));
       } else {
-        cb(res.error);
+        cb(new OADAError(res.error.text,
+                         res.error.status,
+                         'Trusted client discovery provider list not found',
+                         res.error.path));
       }
     });
 }
