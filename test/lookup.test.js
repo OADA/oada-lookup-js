@@ -305,8 +305,8 @@ describe('lookup', function() {
     });
 
     it('should fetch document', function(done) {
-      nock('https://raw.githubusercontent.com')
-        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+      nock('http://openag.io')
+        .get('/oada-trusted-lists/client-discovery.json')
         .reply(200, trustedCDP);
 
       lookup.trustedCDP(function(err, keys) {
@@ -318,8 +318,8 @@ describe('lookup', function() {
     });
 
     it('should fail if non-existent', function(done) {
-      nock('https://raw.githubusercontent.com')
-        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+      nock('http://openag.io')
+        .get('/oada-trusted-lists/client-discovery.json')
         .reply(404);
 
       lookup.trustedCDP(function(err) {
@@ -330,8 +330,8 @@ describe('lookup', function() {
     });
 
     it('should fail if not valid', function(done) {
-      nock('https://raw.githubusercontent.com')
-        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+      nock('http://openag.io')
+        .get('/oada-trusted-lists/client-discovery.json')
         .reply(200, 'Invalid Response');
 
       lookup.trustedCDP(function(err) {
@@ -346,8 +346,8 @@ describe('lookup', function() {
         timeout: 10,
       };
 
-      nock('https://raw.githubusercontent.com')
-        .get('/OADA/oada-trusted-lists/master/client-discovery.json')
+      nock('http://openag.io')
+        .get('/oada-trusted-lists/client-discovery.json')
         .delayConnection(2 * options.timeout)
         .reply(200, trustedCDP);
 

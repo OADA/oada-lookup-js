@@ -151,19 +151,16 @@ function trustedCDP(options, cb) {
 
   // Get trusted CDP list
   request
-    .get('https://raw.githubusercontent.com/OADA/oada-trusted-lists/master/' +
-        'client-discovery.json')
+    .get('http://openag.io/oada-trusted-lists/client-discovery.json')
     .accept('text/plain')
     .timeout(options.timeout)
     .end(function(err, res) {
       if (err) { return cb(err); }
 
-      if (res.ok) {
-        try {
-          cb(null, JSON.parse(res.text));
-        } catch (e) {
-          cb(new Error('Invalid trusted client discovery provider list'));
-        }
+      if (res.ok && res.body.length) {
+        cb(null, res.body);
+      } else if (res.ok) {
+        cb(new Error('Invalid trusted client discovery provider list'));
       } else {
         cb(res.error);
       }
