@@ -151,13 +151,14 @@ function trustedCDP(options, cb) {
 
   // Get trusted CDP list
   request
-    .get('https://raw.githubusercontent.com/OADA/oada-trusted-lists/master/client-discovery.json')
+    .get('https://raw.githubusercontent.com/OADA/oada-trusted-lists/master/' +
+        'client-discovery.json')
     .accept('text/plain')
     .timeout(options.timeout)
     .end(function(err, res) {
       if (err) { return cb(err); }
 
-      if(res.ok) {
+      if (res.ok) {
         try {
           cb(null, JSON.parse(res.text));
         } catch (e) {
