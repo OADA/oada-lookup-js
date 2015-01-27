@@ -306,7 +306,7 @@ describe('lookup', function() {
     });
 
     it('should fetch document', function(done) {
-      nock('http://openag.io')
+      nock('https://oada.github.io')
         .get('/oada-trusted-lists/client-discovery.json')
         .reply(200, trustedCDP);
 
@@ -319,7 +319,7 @@ describe('lookup', function() {
     });
 
     it('should fail if non-existent', function(done) {
-      nock('http://openag.io')
+      nock('https://oada.github.io')
         .get('/oada-trusted-lists/client-discovery.json')
         .reply(404);
 
@@ -331,7 +331,7 @@ describe('lookup', function() {
     });
 
     it('should fail if not valid', function(done) {
-      nock('http://openag.io')
+      nock('https://oada.github.io')
         .get('/oada-trusted-lists/client-discovery.json')
         .reply(200, 'Invalid Response');
 
@@ -347,7 +347,7 @@ describe('lookup', function() {
         timeout: 10,
       };
 
-      nock('http://openag.io')
+      nock('https://oada.github.com')
         .get('/oada-trusted-lists/client-discovery.json')
         .delayConnection(2 * options.timeout)
         .reply(200, trustedCDP);

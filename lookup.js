@@ -161,7 +161,7 @@ function trustedCDP(options, cb) {
 
   // Get trusted CDP list
   request
-    .get('http://openag.io/oada-trusted-lists/client-discovery.json')
+    .get('https://oada.github.io/oada-trusted-lists/client-discovery.json')
     .accept('text/plain')
     .timeout(options.timeout)
     .end(function(err, res) {
