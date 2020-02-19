@@ -46,12 +46,8 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.9",
-    "gulp": "^4.0.2",
-    "gulp-jscs": "^4.1.0",
-    "gulp-jshint": "^2.1.0",
     "husky": "^4.2.3",
     "istanbul": "^0.4.5",
-    "jshint-stylish": "^2.2.1",
     "lint-staged": "^10.0.7",
     "mocha": "^7.0.1",
     "nock": "^12.0.1",
