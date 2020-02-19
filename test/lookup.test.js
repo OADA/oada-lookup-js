@@ -39,7 +39,7 @@ describe('lookup', function() {
     });
 
     it('should be exported', function() {
-      expect(lookup.wellKnown).to.be.a.function;
+      expect(lookup.wellKnown).to.be.a('function');
     });
 
     it('should fetch document', function(done) {
@@ -76,7 +76,7 @@ describe('lookup', function() {
         .reply(404);
 
       lookup.wellKnown(mockHost, 'oada-configuration', function(err) {
-        expect(err.status).to.match(/Not Found/);
+        expect(err.status).to.equal(404);
 
         done();
       });
@@ -126,7 +126,7 @@ describe('lookup', function() {
     });
 
     it('should exported', function() {
-      expect(lookup.clientRegistration).to.be.a.function;
+      expect(lookup.clientRegistration).to.be.a('function');
     });
 
     it('should fetch registration', function(done) {
@@ -150,7 +150,7 @@ describe('lookup', function() {
         .reply(404);
 
       lookup.clientRegistration(clientId, function(err) {
-        expect(err.status).to.match(/Not Found/);
+        expect(err.status).to.equal(404);
 
         done();
       });
@@ -223,7 +223,7 @@ describe('lookup', function() {
       };
 
       lookup.clientRegistration(clientId, options, function(err) {
-        expect(err.status).to.match(/Not Found/);
+        expect(err.status).to.equal(404);
 
         done();
       });
@@ -237,7 +237,7 @@ describe('lookup', function() {
     });
 
     it('should be exported', function() {
-      expect(lookup.jwks).to.be.a.function;
+      expect(lookup.jwks).to.be.a('function');
     });
 
     it('should fetch document', function(done) {
@@ -259,7 +259,7 @@ describe('lookup', function() {
         .reply(404);
 
       lookup.jwks(mockUrl + '/jwks', function(err) {
-        expect(err.status).to.match(/Not Found/);
+        expect(err.status).to.equal(404);
 
         done();
       });
@@ -302,7 +302,7 @@ describe('lookup', function() {
     });
 
     it('should be exported', function() {
-      expect(lookup.trustedCDP).to.be.a.function;
+      expect(lookup.trustedCDP).to.be.a('function');
     });
 
     it('should fetch document', function(done) {
@@ -324,7 +324,7 @@ describe('lookup', function() {
         .reply(404);
 
       lookup.trustedCDP(function(err) {
-        expect(err.status).to.match(/Not Found/);
+        expect(err.status).to.equal(404);
 
         done();
       });
