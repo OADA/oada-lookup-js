@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- lts/*
-- node
+  - lts/*
+  - node
 deploy:
   provider: npm
   email: andrew@balmos.org
@@ -11,11 +11,7 @@ deploy:
     tags: true
     all_branches: true
     repo: OADA/oada-lookup-js
-before_install:
-- npm install -g gulp
 script:
-- gulp lint
-- gulp style
-- npm run cover
+  - npm run cover
 after_success:
-- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls --verbose
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls --verbose

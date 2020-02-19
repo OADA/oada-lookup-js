@@ -2,7 +2,5 @@
   "authorization_endpoint": "https://oada.local/auth",
   "token_endpoint": "https://oada.local/token",
   "oada_base_uri": "https://oada.local",
-  "client_secret_alg_supported": [
-    "RS256"
-  ]
+  "client_secret_alg_supported": ["RS256"]
 }
