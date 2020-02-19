@@ -1,6 +1,6 @@
 {
-  "name": "oada-lookup",
-  "version": "0.4.1",
+  "name": "@oada/oada-lookup",
+  "version": "1.0.0",
   "description": "JavaScript utility library to lookup OADA documents such as Well-Known (RFC 5785) resource, e.g., oada-configuration, openid-configuration, etc, and public OADA client registrations",
   "keywords": [
     "OADA",
@@ -14,23 +14,20 @@
     "url": "https://github.com/OADA/oada-lookup-js/issues"
   },
   "license": "Apache-2.0",
-  "author": {
-    "name": "Andrew Balmos",
-    "email": "abalmos@purdue.edu"
-  },
+  "author": "Andrew Balmos <abalmos@purdue.edu>",
   "main": "lookup.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OADA/oada-lookup-js.git"
+    "url": "git+https://github.com/OADA/oada-lookup-js.git"
   },
   "engines": {
     "node": ">=0.10"
   },
   "scripts": {
-    "test": "./node_modules/.bin/_mocha -w",
+    "test": "_mocha -w",
     "fix": "prettier-standard",
     "lint": "prettier-standard --lint",
-    "cover": "./node_modules/.bin/istanbul cover --preload-sources -x gulpfile.js node_modules/.bin/_mocha -- -R spec",
+    "cover": "istanbul cover mocha -- -R spec",
     "clean": "rm -rf ./coverage"
   },
   "mocha": {
@@ -52,5 +49,8 @@
     "mocha": "^7.0.1",
     "nock": "^12.0.1",
     "prettier-standard": "^16.1.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }
