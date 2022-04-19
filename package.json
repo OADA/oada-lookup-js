@@ -16,6 +16,10 @@
   "license": "Apache-2.0",
   "author": "Andrew Balmos <abalmos@purdue.edu>",
   "main": "dist/index.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OADA/oada-lookup-js.git"
